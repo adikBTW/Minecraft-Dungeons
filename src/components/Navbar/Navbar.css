@@ -1,0 +1,149 @@
+.navbar {
+  background: #fff;
+  border-bottom: 1.5px solid #111;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.navbar-container {
+  padding: 0 24px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.navbar-brand {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #111;
+  text-decoration: none;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  line-height: 1.2;
+  border: 1.5px solid #111;
+  padding: 4px 8px;
+  flex-shrink: 0;
+}
+
+.navbar-brand:hover {
+  background: #111;
+  color: #fff;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 2px;
+  flex: 1;
+}
+
+.navbar-link {
+  padding: 5px 12px;
+  color: #666;
+  text-decoration: none;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: color 0.15s;
+  border-bottom: 2px solid transparent;
+}
+
+.navbar-link:hover {
+  color: #111;
+}
+
+.navbar-link.active {
+  color: #111;
+  border-bottom: 2px solid #111;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.settings-wrapper {
+  position: relative;
+}
+
+.nav-settings-btn {
+  padding: 5px 12px;
+  border: 1px solid #111;
+  background: none;
+  color: #111;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  transition: background 0.15s, color 0.15s;
+}
+
+.nav-settings-btn:hover,
+.nav-settings-btn.active {
+  background: #111;
+  color: #fff;
+}
+
+.settings-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 200px;
+  background: #fff;
+  border: 1.5px solid #111;
+  padding: 14px;
+  z-index: 200;
+  animation: dropIn 0.15s ease;
+}
+
+@keyframes dropIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.settings-section-label {
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.settings-divider {
+  height: 1px;
+  background: #e0e0e0;
+  margin: 12px 0;
+}
+
+.settings-pills {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.settings-pill {
+  padding: 4px 12px;
+  border: 1px solid #ccc;
+  background: none;
+  color: #111;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.settings-pill:hover {
+  border-color: #111;
+}
+
+.settings-pill.active {
+  background: #111;
+  color: #fff;
+  border-color: #111;
+}
