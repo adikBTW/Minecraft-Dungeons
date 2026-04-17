@@ -82,29 +82,32 @@ const ItemsPage = ({ types, title }) => {
       </div>
 
       <div className={`items-layout${selected ? ' has-detail' : ''}`}>
-        <div className="items-grid">
-          {filtered.length === 0 && <p className="no-results">No items found.</p>}
-          {filtered.map((item, i) => (
-            <div key={i}
-              className={`item-card${selected?.name === item.name ? ' selected' : ''}`}
-              onClick={() => setSelected(item)}>
-              <ItemImage name={item.name} type={item.type} />
-              <div className="ic-name">{item.name}</div>
-              <div className="ic-type">{item.type}</div>
-            </div>
-          ))}
+
+        <div className="items-grid-wrap">
+          <div className="items-grid">
+            {filtered.length === 0 && <p className="no-results">No items found.</p>}
+            {filtered.map((item, i) => (
+              <div key={i}
+                className={`item-card${selected?.name === item.name ? ' selected' : ''}`}
+                onClick={() => setSelected(item)}>
+                <ItemImage name={item.name} type={item.type} />
+                <div className="ic-name">{item.name}</div>
+                <div className="ic-type">{item.type}</div>
+              </div>
+            ))}
+          </div>
         </div>
 
         {selected && (
           <div className="detail-panel">
             <button className="detail-close" onClick={() => setSelected(null)}>✕</button>
 
-            {stats && (
+            {selected.rarity && (
               <div className="rarity-badge" style={{
-                color: RARITY_COLOR[stats.rarity],
-                borderColor: RARITY_COLOR[stats.rarity]
+                color: RARITY_COLOR[selected.rarity] || '#8a8a8a',
+                borderColor: RARITY_COLOR[selected.rarity] || '#8a8a8a'
               }}>
-                {stats.rarity}
+                {selected.rarity}
               </div>
             )}
 
@@ -113,10 +116,9 @@ const ItemsPage = ({ types, title }) => {
             <span className="type-tag">{selected.type}</span>
 
             {selected.ability && (
-              <div className="detail-ability">
-                <span className="ability-icon">⚡</span> {selected.ability}
-              </div>
+              <div className="detail-ability">⚡ {selected.ability}</div>
             )}
+
             {selected.description && (
               <p className="detail-desc">{selected.description}</p>
             )}
@@ -126,13 +128,18 @@ const ItemsPage = ({ types, title }) => {
                 <div className="power-level-row">
                   <span className="stat-label">LEVEL</span>
                   <input
-                    type="range"
-                    min={1} max={263}
-                    value={powerLevel}
+                    type="range" min={1} max={263} value={powerLevel}
                     onChange={e => setPowerLevel(Number(e.target.value))}
                     className="level-slider"
                   />
-                  <span className="level-value">{powerLevel}</span>
+                  <input
+                    type="number" min={1} max={263} value={powerLevel}
+                    onChange={e => {
+                      const v = Math.min(263, Math.max(1, Number(e.target.value)));
+                      if (!isNaN(v)) setPowerLevel(v);
+                    }}
+                    className="level-input"
+                  />
                 </div>
 
                 <div className="damage-range">
